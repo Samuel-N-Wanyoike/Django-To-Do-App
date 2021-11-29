@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Delete {% endblock %}
+
+{% block content %}
+<div class="sub-container d-flex flex-column">
+    <div class="header-div d-flex justify-content-between">
+        <h1 class="">Delete</h1>
+        <a href="{% url 'tasks-view' %}"><i class="fas fa-chevron-circle-left back-icon-2"></i></a>
+    </div>
+    <div class="content-div d-flex flex-column">
+        <form method="post">
+            {% csrf_token %}
+            <div class="sentence d-flex justify-content-center mb-2">
+                <h4 class="star me-3">&#x2726;</h4>
+                <span>Are you certain you want to delete "{{task}}"?</span>
+            </div>
+            
+            <div class="buttons-container d-flex justify-content-evenly align-items-center">
+                <button type="submit" class="btn btn-primary">Delete Task</button>
+                <a href="{% url 'tasks-view' %}"><button type="button" class="btn cancel-btn">Cancel</button></a>
+            </div>
+        </form>
+        
+    </div>
+</div>
+{% endblock %}

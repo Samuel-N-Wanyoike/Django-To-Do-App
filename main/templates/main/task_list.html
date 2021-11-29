@@ -1,0 +1,67 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+<div class="container-main-div-2 d-flex justify-content-center align-items-center p-4">
+    <div class="col-4 container-sub-div-2 d-flex flex-column">
+        <h1 id="app-title">To-Do<span class="ms-2">v1.0</span></h1>
+
+        <i class="fas fa-user-astronaut avatar-icon mb-2"></i>
+
+        <h4 class="mb-5">Howdy! {{request.user}}</h4>
+
+        <div class="d-flex flex-column tasks-overview">
+            <h5 class="mb-3">Tasks Overview: </h5>
+            <h6>Complete tasks:  {{number_of_complete_tasks}}</h6>
+            <h6>Incomplete tasks: {{number_of_incomplete_tasks}}</h6>
+        </div>
+
+        <div class="home-button-div d-flex align-items-center justify-content-end mt-2 p-0">
+            <button class="btn btn-primary container-btn-2"><a href="{% url 'logout' %}">Logout</a></button>
+        </div>
+            
+
+    </div>
+    <div class="col-8 container-sub-div-3 d-flex flex-column ms-3 ps-3 pe-3">
+        <h1>My Task list</h1>
+
+        <form method="get" class="g-3 align-items-center">
+            {% csrf_token %}
+            <input class="m-0" type="text" name="user-search-input" id="search-input" placeholder="Search your database..."/>
+            <div class="home-button-div mt-2 d-flex justify-content-end">
+                <button class="btn btn-primary container-btn-2" type="submit">Search</button>
+            </div>
+            
+        </form>
+
+        <div class="mt-2 d-flex flex-column tasks-list-div">
+            {% for task in object_list %}
+            <div class="list-div d-flex align-items-center justify-content-start">
+                <div class="rounded-item d-flex align-items-center justify-content-center me-2">
+                    {% if task.complete %}
+                    &#x2605;
+                    {% endif %}
+                </div>
+                <p class="list-item pt-2 pb-2 mt-2 me-3">
+                    {{task}}
+                </p>
+                <a href="{% url 'edit-task' task.id %}"><i class="fas fa-edit edit-icon m-1"></i></a>
+                <a href="{% url 'delete-task' task.id %}"><i class="fas fa-trash-alt trash-icon m-1"></i></a>
+            </div>
+            
+            {% empty %}
+                <h3>No task available.</h3>
+            {% endfor %}
+        </div>
+        
+
+        <div class="home-button-div-2 d-flex align-items-center justify-content-start mt-2">
+            <button class="btn btn-primary container-btn-2"><a href="{% url 'create-task' %}">Add a New task</a></button>
+        </div>
+            
+
+    </div>
+</div>
+{% endblock %}
