@@ -5,17 +5,17 @@
 <div class="row container-main-div d-flex">
     <h1 class="row d-flex align-items-center justify-content-center mb-3 register-header">Register</h1>
     <div class="row container-sub-div d-flex align-items-center justify-content-center ps-5 pe-5 pt-2 pb-0">
-        <form method="post">
+        <form method="post" action="{% url 'register' %}">
             {% csrf_token %}
             <label>{{form.username.label}}:</label>
             {{form.username}}
             <label>{{form.email.label}} Address:</label>
             {{form.email}}
             <label>{{form.password1.label}}:</label>
-            {{form.password1}} 
+            {{form.password1}}
             <label>{{form.password2.label}}:</label>
             {{form.password2}}
-            
+
             <div class="row d-flex align-items-center justify-content-center">
             <button type="submit" class="btn btn-primary mb-3 container-btn">Sign Up</button>
             </div>
